@@ -9,6 +9,12 @@ class App extends Component {
 
   state = {results: []}
 
+  lastDay = (data) => {
+      const keys = Object.keys(data)      
+      const lastDay = data[keys[0]]
+      return {date: keys[0], data: lastDay}          
+  }
+
   handleInput = (array) => {
     const promises = array.map(symbol => {
       return axios.get(`${API}function=TIME_SERIES_DAILY&symbol=${symbol}&apikey=${API_KEY}`)
@@ -16,7 +22,10 @@ class App extends Component {
     return Promise.all(promises)
       .then(results => {
         const resultArray = results.map((result, i) => {
-            return{ [array[i]]: result.data['Time Series (Daily)'] }           
+            return{ name: array[i], 
+                    data: result.data['Time Series (Daily)'],
+                    current: this.lastDay(result.data['Time Series (Daily)'])
+                  }           
         })
         this.setState({results: resultArray})
       })
