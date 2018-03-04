@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Header from './components/Header/Header'
 import Input from './components/Input/Input'
 import StockData from './components/StockData/StockData'
 import axios from 'axios'
@@ -15,6 +16,11 @@ class App extends Component {
       return {date: keys[0], data: lastDay}          
   }
 
+  lastTenDays = (data) => {
+      const keys = Object.keys(data)
+      // const tenDays = data[] 
+  }
+
   handleInput = (array) => {
     const promises = array.map(symbol => {
       return axios.get(`${API}function=TIME_SERIES_DAILY&symbol=${symbol}&apikey=${API_KEY}`)
@@ -24,7 +30,8 @@ class App extends Component {
         const resultArray = results.map((result, i) => {
             return{ name: array[i], 
                     data: result.data['Time Series (Daily)'],
-                    current: this.lastDay(result.data['Time Series (Daily)'])
+                    current: this.lastDay(result.data['Time Series (Daily)']),
+                    lastTen: this.lastTenDays(result.data['Time Series (Daily)'])
                   }           
         })
         this.setState({results: resultArray})
@@ -34,7 +41,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <h1>market view</h1>
+        <Header />
         <Input handleInput={ this.handleInput }/>
         <StockData data={ this.state.results }/>
       </div>

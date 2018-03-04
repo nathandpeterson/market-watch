@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import './StockData.css'
 
 class StockData extends Component {
 
@@ -26,24 +25,26 @@ class StockData extends Component {
     renderResults = (data) => {       
         return data.map((stock, i) => {
         const { date, data } = stock.current                      
-           return   <div className="card blue-grey darken-1 stock-info" key = {i}>
-                        <div className="card-content white-text">
-                            <h3>{stock.name}</h3>
-                            <h5 className="card-content yellow-text">Trading info for {date} </h5>
-                            <table>
-                                <tbody>
-                                    {this.renderTable(data)}
-                                </tbody>
-                            </table>
+            return  <div className="col"> 
+                        <div className="card blue-grey darken-1 stock-info animated fadeInUp" key = {i}>
+                            <div className="card-content white-text">
+                                <h3>{stock.name}</h3>
+                                <h5 className="blue-text">Trading info for {date} </h5>
+                                <table>
+                                    <tbody>
+                                        {this.renderTable(data)}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
         })
     }
 
     render() {
-        return <div>  
-            {this.renderResults(this.state.data)}
-        </div>
+        return  <div className="container row">  
+                    {this.renderResults(this.state.data)}
+                </div>
     }
 }
 

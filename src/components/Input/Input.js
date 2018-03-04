@@ -23,8 +23,8 @@ class Input extends Component {
     }
 
     render(){
-    return  <div className="row">
-                <div className="input-field col s6">
+    return  <div className="row container">
+                <div className="input-field col s12">
                     <form onSubmit={this.handleSubmit}>
                         <input  value={this.state.input} 
                                 id="input" 
