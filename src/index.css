@@ -21,11 +21,22 @@ body {
   flex-direction: column;
 }
 
-.input-field {
+.input-container {
   background: rgba(245,245,245, .75);
   border-radius: 7.5px;
 }
 
+.input-field {
+  background: transparent;
+}
+
 table {
   width: 100%;
+}
+
+.error-message {
+  background: grey;
+  color: pink;
+  border-radius: 7px;
+  padding: 1rem;
 }
