@@ -18,7 +18,11 @@ class App extends Component {
 
   lastTenDays = (data) => {
       const keys = Object.keys(data)
-      // const tenDays = data[] 
+      const firstTenKeys = keys.slice(0,10)
+      const dataSet = firstTenKeys.map(key => {
+        return data[key]['4. close']
+      })
+      return {'labels': firstTenKeys, dataSet}
   }
 
   handleInput = (array) => {
@@ -29,7 +33,6 @@ class App extends Component {
       .then(results => {
         const resultArray = results.map((result, i) => {
             return{ name: array[i], 
-                    data: result.data['Time Series (Daily)'],
                     current: this.lastDay(result.data['Time Series (Daily)']),
                     lastTen: this.lastTenDays(result.data['Time Series (Daily)'])
                   }           
