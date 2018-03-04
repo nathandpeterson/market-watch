@@ -11,9 +11,15 @@ class Input extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        // send input to API
-        this.props.fetchData(this.state.input)
+        const symbolArray = this.createArray(this.state.input)
+        this.props.handleInput(symbolArray)
         this.setState({input:''})
+    }
+
+    createArray = (input) => {
+        const array = input.split(',')
+        const formattedArray = array.map(item => item.toUpperCase().trim())
+        return formattedArray
     }
 
     render(){
@@ -23,9 +29,7 @@ class Input extends Component {
                         <input  value={this.state.input} 
                                 id="input" 
                                 type="text"
-                                onChange={this.handleText} 
-                                onSubmit={this.handleSubmit}
-                                className="validate" />
+                                onChange={this.handleText} />
                         <label  className="active" 
                                 htmlFor="input">Stock Symbol
                         </label>

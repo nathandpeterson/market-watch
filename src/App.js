@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Input from './components/Input/Input'
+import StockData from './components/StockData/StockData'
 import axios from 'axios'
 const API = 'https://www.alphavantage.co/query?'
 const API_KEY = process.env.API_KEY || '7GEHGW84ZCELCFVO'
@@ -8,12 +9,16 @@ class App extends Component {
 
   state = {results: []}
 
-  fetchData = (data) => {
-    console.log(data);
-    
-    axios.get(`${API}function=TIME_SERIES_DAILY_ADJUSTED&symbol=${data}&apikey=${API_KEY}`)
+  handleInput = (array) => {
+    const promises = array.map(symbol => {
+      return axios.get(`${API}function=TIME_SERIES_DAILY&symbol=${symbol}&apikey=${API_KEY}`)
+    })
+    return Promise.all(promises)
       .then(results => {
-        console.log(results.data)
+        const resultArray = results.map((result, i) => {
+            return{ [array[i]]: result.data['Time Series (Daily)'] }           
+        })
+        this.setState({results: resultArray})
       })
   }
 
@@ -21,7 +26,8 @@ class App extends Component {
     return (
       <div>
         <h1>market view</h1>
-        <Input fetchData={ this.fetchData }/>
+        <Input handleInput={ this.handleInput }/>
+        <StockData data={ this.state.results }/>
       </div>
     )
   }
