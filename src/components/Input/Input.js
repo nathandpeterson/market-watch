@@ -31,7 +31,7 @@ class Input extends Component {
                                 type="text"
                                 onChange={this.handleText} />
                         <label  className="active" 
-                                htmlFor="input">Stock Symbol
+                                htmlFor="input">enter stock symbols separated by commas
                         </label>
                     </form>
                 </div>
