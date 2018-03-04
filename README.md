@@ -11,5 +11,6 @@ A react application to display stock information.
 ## Installation
 
 Clone this repo. Enter the following commands to run the app:
-`npm install \n
-npm start`
+`npm install`
+
+`npm start`
