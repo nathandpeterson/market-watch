@@ -12,7 +12,7 @@ class Input extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
         // send input to API
-        console.log(this.state.input)
+        this.props.fetchData(this.state.input)
         this.setState({input:''})
     }
 
