@@ -21,23 +21,27 @@ class StockData extends Component {
         })
     }
 
-    renderChart = (data) => {
-        const dates = data.labels.map(date => {
+    renderChart = ({labels, dataSet}) => {
+        const dates = labels.map(date => {
             const x = date.split('-')
             const y = x.slice(1)
             return y.join('/')
-        })        
-        const dataFormat = data.dataSet.map((str, i )=> {
+        }).reverse()
+        // Data needs to be reversed since API gives it to us from present backwards
+        const reversedData = dataSet.reverse()
+        const dataFormat = reversedData.map((str, i )=> {
            return {y: parseFloat(str), x: dates[i] } 
         })        
-        return <VictoryChart width={650} height={200}
-                            theme={VictoryTheme.material}> 
-                    <VictoryLine 
-                    style={{    data: { stroke: "#c43a31" },
-                                parent: { border: "1px solid #ccc"},
-                            }}
-                    data={dataFormat} />
-                </VictoryChart>
+        return <div>
+                    <h5 className="blue-text">Ten stock day performance from {dates[0]} to {dates[9]}</h5>
+                    <VictoryChart width={650} height={200}
+                                    theme={VictoryTheme.material}> 
+                        <VictoryLine 
+                            style={{data: { stroke: "#c43a31" },
+                                    parent: { border: "1px solid #ccc"} }}
+                            data={dataFormat} />
+                    </VictoryChart>
+                </div>
     }
 
     renderResults = (data) => {       
