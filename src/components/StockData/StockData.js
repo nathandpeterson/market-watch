@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { VictoryLine, VictoryChart } from 'victory'
+import { VictoryLine, VictoryChart, VictoryTheme } from 'victory'
 
 class StockData extends Component {
 
@@ -30,10 +30,11 @@ class StockData extends Component {
         const dataFormat = data.dataSet.map((str, i )=> {
            return {y: parseFloat(str), x: dates[i] } 
         })        
-        return <VictoryChart style={{ data: {fontSize: '.5rem'}}}> 
+        return <VictoryChart width={650} height={200}
+                            theme={VictoryTheme.material}> 
                     <VictoryLine 
                     style={{    data: { stroke: "#c43a31" },
-                                parent: { border: "1px solid #ccc"}
+                                parent: { border: "1px solid #ccc"},
                             }}
                     data={dataFormat} />
                 </VictoryChart>
