@@ -36,6 +36,7 @@ class App extends Component {
   }
 
   handleInput = (array) => {
+    if(!array.length) return
     const promises = array.map(symbol => {
       return axios.get(`${API}function=TIME_SERIES_DAILY&symbol=${symbol}&apikey=${API_KEY}`)
     })

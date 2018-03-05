@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { VictoryLine, VictoryChart } from 'victory'
 
 class StockData extends Component {
 
@@ -13,20 +14,37 @@ class StockData extends Component {
 
     renderTable = (data) => {
         return this.tableNames.map((item, i) => {
-            return      <tr key={i}>
+                return  <tr key={i}>
                             <td>{this.tableNames[i]}</td>
                             <td>{data[this.tableKeys[i]]}</td>
                         </tr>
         })
     }
 
+    renderChart = (data) => {
+        const dates = data.labels.map(date => {
+            const x = date.split('-')
+            const y = x.slice(1)
+            return y.join('/')
+        })        
+        const dataFormat = data.dataSet.map((str, i )=> {
+           return {y: parseFloat(str), x: dates[i] } 
+        })        
+        return <VictoryChart style={{ data: {fontSize: '.5rem'}}}> 
+                    <VictoryLine 
+                    style={{    data: { stroke: "#c43a31" },
+                                parent: { border: "1px solid #ccc"}
+                            }}
+                    data={dataFormat} />
+                </VictoryChart>
+    }
 
     renderResults = (data) => {       
         return data.map((stock, i) => {
         const { date, data } = stock.current                      
             return  <div key = {i} className="col"> 
-                        <div className="card blue-grey darken-1 stock-info animated fadeInUp">
-                            <div className="card-content white-text">
+                        <div className="card darken-1 stock-info animated fadeInUp">
+                            <div className="card-content">
                                 <h3>{stock.name}</h3>
                                 <h5 className="blue-text">Trading info for {date} </h5>
                                 <table>
@@ -34,6 +52,7 @@ class StockData extends Component {
                                         {this.renderTable(data)}
                                     </tbody>
                                 </table>
+                                        {this.renderChart(stock.lastTen)}
                             </div>
                         </div>
                     </div>
