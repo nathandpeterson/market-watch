@@ -13,6 +13,8 @@ class Input extends Component {
         e.preventDefault()
         const symbolArray = this.createArray(this.state.input)
         this.props.handleInput(symbolArray)
+        let symbolString = JSON.stringify(symbolArray)
+        localStorage.setItem('search', symbolString)
         this.setState({input:''})
     }
 
@@ -22,7 +24,6 @@ class Input extends Component {
         const formattedArray = array.map(item => item.toUpperCase().trim())
         return formattedArray
     }
-
 
     render(){
     return  <div className="row container">
