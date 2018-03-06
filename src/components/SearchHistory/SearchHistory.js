@@ -24,6 +24,11 @@ class SearchHistory extends Component {
             this.setState({search})
         }
     }
+    
+    addAll = () => {
+        console.log('add props to input field by calling this.props.setInputField');
+        
+    }
 
     render(){
     if(!this.state.search.length) return <div />
@@ -32,7 +37,7 @@ class SearchHistory extends Component {
                     {this.renderSearches()}
                     <a  className='waves-effect waves-light btn'
                         onClick={this.addAll}>add all</a>
-                    <a  className='waves-effect waves-light btn'
+                    <a  className='waves-effect waves-light btn red'
                         onClick={this.clear}>clear searches</a>
                 </div>
     }

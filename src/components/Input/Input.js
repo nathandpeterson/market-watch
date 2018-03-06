@@ -25,6 +25,12 @@ class Input extends Component {
         return formattedArray
     }
 
+    componentWillReceiveProps(nextProps){
+        console.log('in the input',nextProps)
+        const { input } = nextProps        
+        this.setState({input})
+    }
+
     render(){
     return  <div className="row container">
                 <div className="input-container col s12">

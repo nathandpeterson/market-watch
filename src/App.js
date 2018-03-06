@@ -11,7 +11,7 @@ const API_KEY = process.env.API_KEY || '7GEHGW84ZCELCFVO'
 
 class App extends Component {
 
-  state = {results: [], error: ''}
+  state = {results: [], error: '', input: []}
 
   handleError = (error) => {
    this.setState({error, results: []})
@@ -56,12 +56,16 @@ class App extends Component {
       })
   }
 
+  setInputField = ({ input }) => {    
+    this.setState({input})
+  }
+
   render() {
     return (
       <div>
         <Header />
-        <SearchHistory />
-        <Input handleInput={ this.handleInput }/>
+        <SearchHistory setInputField={this.setInputField}/>
+        <Input handleInput={ this.handleInput } input={this.state.input}/>
         {this.state.error && <Error />}
         <StockData data={ this.state.results }/>
       </div>
