@@ -3,7 +3,6 @@ import Header from './components/Header/Header'
 import Input from './components/Input/Input'
 import Error from './components/Error/Error'
 import StockData from './components/StockData/StockData'
-import SearchHistory from './components/SearchHistory/SearchHistory'
 import axios from 'axios'
 
 const API = 'https://www.alphavantage.co/query?'
@@ -11,7 +10,7 @@ const API_KEY = process.env.API_KEY || '7GEHGW84ZCELCFVO'
 
 class App extends Component {
 
-  state = {results: [], error: '', input: []}
+  state = {results: [], error: '' }
 
   handleError = (error) => {
    this.setState({error, results: []})
@@ -56,16 +55,11 @@ class App extends Component {
       })
   }
 
-  setInputField = ({ input }) => {    
-    this.setState({input})
-  }
-
   render() {
     return (
       <div>
         <Header />
-        <SearchHistory setInputField={this.setInputField}/>
-        <Input handleInput={ this.handleInput } input={this.state.input}/>
+        <Input handleInput={ this.handleInput } />
         {this.state.error && <Error />}
         <StockData data={ this.state.results }/>
       </div>

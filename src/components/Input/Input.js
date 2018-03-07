@@ -25,12 +25,6 @@ class Input extends Component {
         return formattedArray
     }
 
-    componentWillReceiveProps(nextProps){
-        console.log('in the input',nextProps)
-        const { input } = nextProps        
-        this.setState({input})
-    }
-
     render(){
     return  <div className="row container">
                 <div className="input-container col s12">
@@ -41,7 +35,7 @@ class Input extends Component {
                                 className="input-field"
                                 onChange={this.handleText} />
                         <label  className="active" 
-                                htmlFor="input">enter stock symbols separated by commas
+                                htmlFor="input">enter stock symbols separated by commas (NASDAQ:AAPL, NASDAQ:AMZN, NYSE:APTV)
                         </label>
                     </form>
                 </div>
