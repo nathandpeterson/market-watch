@@ -10,6 +10,7 @@ A react application to display stock information.
 * Check out a deployed demo [here](http://market-view.surge.sh)
 
 ![](screenshot.png)
+![](line-chart.png)
 
 ## Installation
 

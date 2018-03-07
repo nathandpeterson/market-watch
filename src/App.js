@@ -4,12 +4,13 @@ import Input from './components/Input/Input'
 import Error from './components/Error/Error'
 import StockData from './components/StockData/StockData'
 import axios from 'axios'
+
 const API = 'https://www.alphavantage.co/query?'
 const API_KEY = process.env.API_KEY || '7GEHGW84ZCELCFVO'
 
 class App extends Component {
 
-  state = {results: [], error: ''}
+  state = {results: [], error: '' }
 
   handleError = (error) => {
    this.setState({error, results: []})
@@ -36,6 +37,7 @@ class App extends Component {
   }
 
   handleInput = (array) => {
+    if(!array.length) return
     const promises = array.map(symbol => {
       return axios.get(`${API}function=TIME_SERIES_DAILY&symbol=${symbol}&apikey=${API_KEY}`)
     })
@@ -57,7 +59,7 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <Input handleInput={ this.handleInput }/>
+        <Input handleInput={ this.handleInput } />
         {this.state.error && <Error />}
         <StockData data={ this.state.results }/>
       </div>
